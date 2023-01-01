@@ -1,12 +1,15 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import historyReducer from "../features/history/historySlice"
-import pokedexReducer from "../features/pokedex/pokedexSlice"
+import { pokemonApi } from './features/pokemon'
+
 
 export const store = configureStore({
   reducer: {
     history: historyReducer,
-    pokedex: pokedexReducer
+    [pokemonApi.reducerPath]: pokemonApi.reducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(pokemonApi.middleware),
 });
 
 export type AppDispatch = typeof store.dispatch;
