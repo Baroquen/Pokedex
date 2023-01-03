@@ -1,18 +1,33 @@
-import { useState } from "react";
-import Card from "react-bootstrap/Card";
-import { useAppSelector, useAppDispatch } from "../../app/hooks";
+import Container from "react-bootstrap/Container";
+import { If, Then, Else } from "react-if";
+//import { useAppSelector, useAppDispatch } from "../../app/hooks";
+import { useGetPokemonQuery } from "./pokedexAPI";
+import { Pokemon } from "./Pokemon"
 
-export function Pokedex () { 
-    const pokedex = useAppSelector((state) => state.pokedex.value);
-    const dispatch = useAppDispatch();
+export function Pokedex() {
+  // const searchHistory = useAppSelector((state) => state.history);
+  // const dispatch = useAppDispatch();
 
-    return (
-        <Card>
-            <Card.Img />
-            <Card.Body>
-                <Card.Title>Hi</Card.Title>
-                <Card.Text>Hello</Card.Text>
-            </Card.Body>
-        </Card>
-    )
+  const { data, isFetching, isLoading } = useGetPokemonQuery();
+
+  return (
+    <>
+      <If condition={isLoading || isFetching}>
+        <Then>
+          <p>Loading...</p>
+        </Then>
+        <Else>
+        <Container className="row row-cols-md-6">
+            {data?.results.map(pokemon => {
+                return (
+                    <div className="col">
+                    <Pokemon name={pokemon.name} />
+                    </div>
+                )
+            })}
+            </Container>
+        </Else>
+      </If>
+    </>
+  );
 }
