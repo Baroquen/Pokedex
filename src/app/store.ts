@@ -1,6 +1,6 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import historyReducer from "../features/history/historySlice"
-import { pokemonApi } from '../features/pokedex/pokedexAPI'
+import { pokemonApi } from '../features/pokedex/pokedexApi'
 
 
 export const store = configureStore({
