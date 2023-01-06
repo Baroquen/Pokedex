@@ -4,9 +4,14 @@ export type Pokemon = {
     sprites: {front_default: string}
 }
 
+export type PokemonUrls = { 
+    name: string,
+    url: string
+}
+
 export type PokemonList = {
     count: number,
     next: string | undefined,
     previous: string | undefined,
-    results: [{name: string, url: string}]
+    results: PokemonUrls[]
 }
