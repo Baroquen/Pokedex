@@ -1,20 +1,21 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Pokemon } from "../pokedex/types.d";
 
 export interface HistoryState {
-  value: String[];
+  value: Pokemon[];
 }
 
 const initialState: HistoryState = {
-  value: []
+  value: [],
 };
 
 export const historySlice = createSlice({
-  name: 'Search History',
+  name: "Search History",
   initialState,
   reducers: {
-    add: (state, action: PayloadAction<String>) => {
-      state.value = [...state.value, action.payload]
-    }
+    add: (state, action: PayloadAction<Pokemon>) => {
+      state.value = [action.payload, ...state.value.filter((x) => x.id !== action.payload.id)];
+    },
   },
 });
 
