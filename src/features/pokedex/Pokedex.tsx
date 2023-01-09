@@ -11,44 +11,47 @@ export function Pokedex() {
   // const searchHistory = useAppSelector((state) => state.history);
   // const dispatch = useAppDispatch();
 
-  const { data, isFetching, isLoading } = useGetPokemonQuery();
-  const [display, setDisplay] = useState<PokemonUrls[] | undefined> (data?.results );
+  const { data, isLoading } = useGetPokemonQuery();
+  const [display, setDisplay] = useState<PokemonUrls[]>([]);
+  const [filter, setFilter] = useState<string>("");
 
   useEffect(() => {
-    setDisplay(data?.results);
+    if (!!data) {
+      setDisplay(data.results);
+    }
   }, [data]);
 
   const onChange = (newValue: string) => {
-    if (!!newValue) {
-      setDisplay(data?.results.filter((x) => x.name.startsWith(newValue)));
-    } else {
-      setDisplay(data?.results);
-    }
+    setFilter(newValue);
   };
 
   return (
-    <>
-      <If condition={isLoading || isFetching}>
+    <Container>
+      <Row>
+        <SearchBar onChange={onChange} disabled={isLoading} />
+      </Row>
+      <If condition={filter === ""}>
         <Then>
-          <p>Loading...</p>
+          <Row className="row-cols-md-6">
+            {display?.map((pokemon) => {
+              return (
+                  <PokemonCard name={pokemon.name} key={pokemon.name}/>
+              );
+            })}
+          </Row>
         </Then>
         <Else>
-          <Container>
-            <Row>
-              <SearchBar onChange={onChange} />
-            </Row>
-            <Row className="row-cols-md-6">
-              {display?.map((pokemon) => {
+          <Row className="row-cols-md-6">
+            {display
+              ?.filter((x) => x.name.startsWith(filter))
+              .map((pokemon) => {
                 return (
-                  <div className="col">
-                    <PokemonCard name={pokemon.name} />
-                  </div>
+                    <PokemonCard name={pokemon.name} key={pokemon.name} />
                 );
               })}
-            </Row>
-          </Container>
+          </Row>
         </Else>
       </If>
-    </>
+    </Container>
   );
 }
