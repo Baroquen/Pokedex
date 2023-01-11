@@ -8,6 +8,7 @@
 ## Future Enhancement Suggestions
 - Pokedex for multiple categories (Shiny, region, legendaries, etc.)
 - Carousal to navigate detail pages
+- Evolution line
 
 ## Tech debt
 - Limit is hardcoded on Pokedex API when getting the list of pokemon.  This should not be hardcoded.
