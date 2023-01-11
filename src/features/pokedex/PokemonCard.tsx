@@ -34,28 +34,19 @@ export const PokemonCard: FC<PokemonProps> = ({ name }: PokemonProps) => {
         </Card>
       </Then>
       <Else>
-        <>
-          {!!data && (
-            <Button
-              onClick={() => handleClick(data)}
-              className="btn btn-light"
-            >
+        {!!data && (
+          <>
+            <Button onClick={() => handleClick(data)} className="btn btn-light">
               <Card>
-                <Card.Img variant="top" src={data?.sprites.front_default} />
+                <Card.Img variant="top" src={data.sprites.front_default} />
                 <Card.Body>
-                  <Card.Title className="text-center">{data?.name}</Card.Title>
+                  <Card.Title className="text-center">{data.name}</Card.Title>
                 </Card.Body>
               </Card>
             </Button>
-          )}
-          <PokemonDetails
-            pokemon={data}
-            display={isDisplayed}
-            handleClose={() => {
-              setIsDisplayed(false);
-            }}
-          />
-        </>
+            <PokemonDetails pokemon={data} display={isDisplayed} handleClose={() => { setIsDisplayed(false); }} />
+          </>
+        )}
       </Else>
     </If>
   );

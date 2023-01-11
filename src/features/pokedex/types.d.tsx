@@ -1,7 +1,8 @@
-export type Pokemon = {
-    id: number,
-    name: string,
-    sprites: {front_default: string}
+export type PokemonList = {
+    count: number,
+    next: string | undefined,
+    previous: string | undefined,
+    results: PokemonUrls[]
 }
 
 export type PokemonUrls = { 
@@ -9,9 +10,14 @@ export type PokemonUrls = {
     url: string
 }
 
-export type PokemonList = {
-    count: number,
-    next: string | undefined,
-    previous: string | undefined,
-    results: PokemonUrls[]
+export type Pokemon = {
+    id: number,
+    name: string,
+    order: number,
+    sprites: {front_default: string},
+    abilities: [{ability: UrlBase}],
+    moves: [{move: UrlBase}],
+    types: [{type: UrlBase}]
 }
+
+type UrlBase = {name: string, url:string}
