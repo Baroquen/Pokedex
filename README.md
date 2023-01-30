@@ -1,5 +1,5 @@
 # Pokedex
-I created this pokedex as a coding challenge while job hunting in 2023.  It uses Redux to reach out to an existing Pokemon API and then displays the pokemon and a recent search history using react.
+I created this pokedex as a coding challenge while job hunting in 2023.  It uses Redux to reach out to an existing Pokemon API and then displays the pokemon and a recent search history using react.  I have previously worked with React, javascript, and typescript.  I had taken a course on Redux and we used it in one small area of my previous job, but I have not used it extensively.
 
 ## Notes
 - Took the liberty to make the search bar filter the pokedex as the user types
